@@ -22,18 +22,22 @@
 
             <StackPanel Orientation="Vertical" Grid.Column="1">
                 <Image 
+                x:Name="PhotoAddProd"
                 VerticalAlignment="Top"
                 Source="\Images\Product\Nullabe.png"
                 Margin="7"
+                Height="180"
+                Width="240"
                 />
 
                 <TextBlock Text="/Images/Product/Nullabe.png" x:Name="Pach" Margin="5" Height="25"/>
 
                 <Button 
+                    x:Name="AddImages"
                     Height="25"
                     Style="{StaticResource Lololo}"
                     Content="Выбрать"
-                    Margin="5"
+                    Margin="5" Click="AddImages_Click"
                         />
             </StackPanel>
 

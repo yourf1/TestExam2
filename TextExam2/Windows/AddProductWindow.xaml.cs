@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TextExam2.Model;
+using Microsoft.Win32;
 
 namespace TextExam2.Windows
 {
@@ -47,6 +48,7 @@ namespace TextExam2.Windows
                     ClassConnect.com.Product.Add(NewAddProduct);
                     //Сохраняем данные в БД
                     ClassConnect.com.SaveChanges();
+                    MessageBox.Show("Товар успешно добавлен!");
                     this.Close();
                     //Обновляем данные в списке с товаром
                     (this.Owner as ConfigWindow).UpdateProductList();
@@ -55,6 +57,16 @@ namespace TextExam2.Windows
                 }
             }catch{
                 MessageBox.Show("Непредвидимая ошибка!");
+            }
+        }
+
+        private void AddImages_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            if(op.ShowDialog() == true)
+            {
+                PhotoAddProd.Source = new BitmapImage(new Uri(op.FileName));
+                Pach.Text = op.FileName;
             }
         }
     }

@@ -96,9 +96,10 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button
+                                x:Name="DelProduct"
                                 Background="#76e383"
                                 Content="Удаление"
-                                Width="100"/>
+                                Width="100" Click="DelProduct_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

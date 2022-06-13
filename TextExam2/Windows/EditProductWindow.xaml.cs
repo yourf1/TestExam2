@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,8 +22,6 @@ namespace TextExam2.Windows
     /// </summary>
     public partial class EditProductWindow : Window
     {
-        // public List<Model.Role> Roles;
-
         //Обзываем модель чтобы к ней обращаться
         private Model.Product EditProduct;
 
@@ -31,11 +30,16 @@ namespace TextExam2.Windows
             InitializeComponent();
             try
             {
+                //Выводим картинку в страницу редактирования
+                PhotoMaterial.Source = new BitmapImage(new Uri(EditInemProduct.Image));
+
+                //Заполняем данные на форме
                 TypeProduct.ItemsSource = Model.ClassConnect.com.ProductType.ToList();
                 NameProduct.Text = EditInemProduct.ProductName;
                 PriceProduct.Text = EditInemProduct.Price.ToString();
                 PachImage.Text = EditInemProduct.Image;
 
+                //То что передали приравниваем к модели
                 EditProduct = EditInemProduct;
             }
             catch
@@ -62,9 +66,11 @@ namespace TextExam2.Windows
                     EditProduct.ProductName = NameProduct.Text;
                     EditProduct.Price = Convert.ToDecimal(PriceProduct.Text);
                     EditProduct.IdProductType = int.Parse(TypeProduct.SelectedValue.ToString());
+                    EditProduct.Image = PachImage.Text;
 
                     //Сохранение в БД
                     Model.ClassConnect.com.SaveChanges();
+                    MessageBox.Show("Товар успешно отредактирован!");
                     this.Close();
                     //ОБНОВЛЕНИЕ СПИСКА С ПРОДУКТАМИ, UpdateProductList - СОЗДАЕТСЯ В ConfigWindow
                     (this.Owner as ConfigWindow).UpdateProductList();
@@ -76,6 +82,20 @@ namespace TextExam2.Windows
                     MessageBox.Show("Непредеднная ошибка");
                 }
             }
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            //Добавление картинки
+            //ДОБАВИТЬ using Microsoft.Win32;
+            OpenFileDialog op = new OpenFileDialog();
+            
+            if(op.ShowDialog() == true)
+            {
+                PhotoMaterial.Source = new BitmapImage(new Uri(op.FileName));
+                PachImage.Text = op.FileName;
+            }
+
         }
     }
 }

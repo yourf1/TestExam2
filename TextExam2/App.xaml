@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:TextExam2"
              StartupUri="\Windows\AuthWindows.xaml">
     <Application.Resources>
+        <!--Стиль-->
         <Style TargetType="Button" x:Key="Lololo">
             <Setter Property="Background" Value="#498c51"/>
         </Style>

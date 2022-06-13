@@ -25,11 +25,7 @@
                     <BlurEffect Radius="4"/>
                 </StackPanel.Effect>
             </StackPanel>
-            
             <TextBox Margin="0 15 0 0"  Height="25" Width="170" x:Name="CapchTbx" Visibility="Hidden"/>
-
-            
-
         </StackPanel>
 
     </Grid>

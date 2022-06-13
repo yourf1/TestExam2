@@ -21,9 +21,11 @@ namespace TextExam2.Windows
     /// </summary>
     public partial class ConfigWindow : Window
     {
-        public List<Model.Product> AllProduct;//создаем лист для заполнения из бд для заполнения дата грида
+        //создаем лист для заполнения из бд для заполнения дата грида
+        public List<Model.Product> AllProduct;
 
-        public List<Model.Product> FiltrDataGrid; // Лист где будет фильтрация
+        // Лист где будет фильтрация
+        public List<Model.Product> FiltrDataGrid;
         public ConfigWindow()
         {
             InitializeComponent();
@@ -118,10 +120,10 @@ namespace TextExam2.Windows
 
         private void Serch_TextChanged(object sender, TextChangedEventArgs e)
         {
+            //Проверка, что в тесктбоксе больше 1 символа
             if (Serch.Text.Length >= 1)
             {
-                //в GravDataGrid вставить поиск 
-               //GravDataGrid();
+
             }
         }
 
@@ -129,6 +131,26 @@ namespace TextExam2.Windows
         {
             //фильтр по цене
             GravDataGrid();
+        }
+
+        private void DelProduct_Click(object sender, RoutedEventArgs e)
+        {
+            //Проверка, что в DataGrid выбран элемент
+            if(ProductList.SelectedItems.Count == 1)
+            {
+                try
+                {
+                        //Удаление объекта из DataGrid
+                        ClassConnect.com.Product.Remove(ProductList.SelectedItem as Model.Product);
+                        ClassConnect.com.SaveChanges();
+                        UpdateProductList();
+                        MessageBox.Show("Объект успешно удален!");
+                }
+                catch
+                {
+                    MessageBox.Show("Произошла непредвиденная ошибка");
+                }
+            }
         }
     }
 }

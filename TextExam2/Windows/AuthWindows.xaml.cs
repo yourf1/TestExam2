@@ -65,26 +65,25 @@ namespace TextExam2
                 }
             }
 
-            //Нужно обернурь в тру кейч чтобы не сломалось в случае отключания бд
+            //Нужно обернурь в тру кейч чтобы не сломалось в случае оключения бд и тд
             try
             {
                 //Авторизация 
                 var AuthUser = ClassConnect.com.User.Where(a => a.Login == LoginTbx.Text && a.Password == PassPbx.Password.ToString());
                 if (AuthUser.Count() > 0)
                 {
-                    //MessageBox.Show("Успешно");
-
                     //Заполнение ресурсов
                     var DataAuth = AuthUser.ToList()[0];
                     Application.Current.Resources["Role"] = DataAuth.IdRole;
                     Application.Current.Resources["FullName"] = DataAuth.FirtName + " " + DataAuth.LastName;
                     Application.Current.Resources["UserId"] = DataAuth.Id;
 
+                    MessageBox.Show("Вы успешно авторизовались!");
                     //Открытие нового окна
                     ConfigWindow newWendow = new ConfigWindow();
                     newWendow.Show();
                     this.Close();
-
+                    //Скрываем капчу
                     HideCapch();
                 }
                 else
@@ -96,7 +95,7 @@ namespace TextExam2
             }
             catch
             {
-                MessageBox.Show("Отвалилась бд");
+                MessageBox.Show("Произошла непредвиденная ошибка!");
             }
         }
 
